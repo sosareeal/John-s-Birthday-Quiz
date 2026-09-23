@@ -1,161 +1,852 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>John's Birthday Quiz</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #fff4d6, #ffd6e8);
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John ✦ A Little Birthday Mystery</title>
 
-      .container {
-        max-width: 700px;
-        width: 90%;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        padding: 32px;
-      }
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-      h1 {
-        text-align: center;
-        color: #a8466d;
-        margin-bottom: 20px;
-      }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+      radial-gradient(circle at top, rgba(70, 100, 170, .28), transparent 35%),
+      linear-gradient(145deg, #020817, #071a38 50%, #010510);
+    color: #fff;
+    overflow-x: hidden;
+  }
 
-      .quiz {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
 
-      .question {
-        background: #fff6fa;
-        border: 1px solid #f0d8e5;
-        border-radius: 12px;
-        padding: 18px;
-      }
+  .star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 8px white;
+    animation: twinkle 2.5s infinite ease-in-out;
+  }
 
-      .question h2 {
-        font-size: 1.1rem;
-        margin: 0 0 12px;
-        color: #5b2d3a;
-      }
+  @keyframes twinkle {
+    0%, 100% { opacity: .25; transform: scale(.7); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
 
-      .options {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
+  .wrap {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 650px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 30px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-      label {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
-        border-radius: 8px;
-        background: #fff;
-        border: 1px solid #f0d8e5;
-        cursor: pointer;
-      }
+  .card {
+    width: 100%;
+    padding: 35px 24px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 28px;
+    background: rgba(3, 15, 38, .82);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 25px 70px rgba(0,0,0,.45);
+    text-align: center;
+  }
 
-      input[type="radio"] {
-        accent-color: #a8466d;
-      }
+  .hidden {
+    display: none !important;
+  }
 
-      button {
-        background: #a8466d;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 10px;
-        font-size: 1rem;
-        cursor: pointer;
-      }
+  .tiny {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #aebddd;
+    margin-bottom: 15px;
+  }
 
-      button:hover {
-        background: #8a3958;
-      }
+  h1 {
+    margin: 0 0 12px;
+    font-size: clamp(42px, 12vw, 70px);
+    letter-spacing: 2px;
+  }
 
-      #result {
-        display: none;
-        margin-top: 18px;
-        text-align: center;
-        font-weight: bold;
-        color: #2d7a4d;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>🎉 John's Birthday Quiz</h1>
-      <form class="quiz" id="quizForm">
-        <div class="question">
-          <h2>1. What is John's favorite color?</h2>
-          <div class="options">
-            <label><input type="radio" name="q1" value="A" /> Blue</label>
-            <label><input type="radio" name="q1" value="B" /> Red</label>
-            <label><input type="radio" name="q1" value="C" /> Green</label>
-          </div>
-        </div>
+  h2 {
+    font-size: clamp(25px, 7vw, 38px);
+    margin: 0 0 15px;
+  }
 
-        <div class="question">
-          <h2>2. Which hobby does John enjoy the most?</h2>
-          <div class="options">
-            <label><input type="radio" name="q2" value="A" /> Reading</label>
-            <label><input type="radio" name="q2" value="B" /> Hiking</label>
-            <label><input type="radio" name="q2" value="C" /> Cooking</label>
-          </div>
-        </div>
+  .subtitle {
+    color: #d8e1f2;
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0 auto 28px;
+    max-width: 500px;
+  }
 
-        <div class="question">
-          <h2>3. What is John's birth month?</h2>
-          <div class="options">
-            <label><input type="radio" name="q3" value="A" /> January</label>
-            <label><input type="radio" name="q3" value="B" /> July</label>
-            <label><input type="radio" name="q3" value="C" /> December</label>
-          </div>
-        </div>
+  .birthday {
+    display: inline-block;
+    margin: 10px 0 25px;
+    padding: 9px 17px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50px;
+    color: #dce7ff;
+    background: rgba(255,255,255,.05);
+    font-size: 14px;
+  }
 
-        <button type="submit">Submit Answers</button>
-      </form>
-      <div id="result">🎂 Great job! You know John well!</div>
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .start-btn,
+  .next-btn {
+    border: none;
+    border-radius: 50px;
+    padding: 15px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #06122c;
+    background: #fff;
+    box-shadow: 0 8px 25px rgba(255,255,255,.15);
+    transition: .25s ease;
+  }
+
+  .start-btn:hover,
+  .next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(255,255,255,.22);
+  }
+
+  .music-btn {
+    position: fixed;
+    right: 16px;
+    top: 16px;
+    z-index: 10;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.25);
+    background: rgba(4,17,42,.85);
+    color: white;
+    font-size: 18px;
+  }
+
+  .progress-area {
+    margin-bottom: 28px;
+  }
+
+  .progress-text {
+    display: flex;
+    justify-content: space-between;
+    color: #aebddd;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .progress {
+    width: 100%;
+    height: 7px;
+    background: rgba(255,255,255,.1);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 14.28%;
+    background: white;
+    border-radius: 20px;
+    transition: width .4s ease;
+  }
+
+  .question {
+    font-size: clamp(23px, 6vw, 31px);
+    line-height: 1.35;
+    margin: 0 0 24px;
+  }
+
+  .answers {
+    display: grid;
+    gap: 12px;
+  }
+
+  .answer {
+    width: 100%;
+    padding: 16px 17px;
+    border-radius: 17px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(255,255,255,.055);
+    color: white;
+    font-size: 15px;
+    text-align: left;
+    line-height: 1.45;
+    transition: .2s ease;
+  }
+
+  .answer:hover {
+    background: rgba(255,255,255,.12);
+    transform: translateY(-1px);
+  }
+
+  .answer.selected {
+    background: rgba(255,255,255,.18);
+    border-color: rgba(255,255,255,.65);
+  }
+
+  .next-btn {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .reveal-label {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #aebddd;
+    margin-bottom: 12px;
+  }
+
+  .result {
+    font-size: clamp(31px, 9vw, 52px);
+    margin: 0 0 20px;
+  }
+
+  .result-text {
+    color: #d8e1f2;
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  .sparkle {
+    font-size: 28px;
+    animation: float 2s infinite ease-in-out;
+    display: inline-block;
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
+
+  .confetti {
+    position: fixed;
+    width: 8px;
+    height: 12px;
+    top: -20px;
+    z-index: 20;
+    animation: fall 3.5s linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .wrap {
+      padding: 18px 12px;
+    }
+
+    .card {
+      padding: 30px 18px;
+      border-radius: 23px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+    }
+
+    .answer {
+      padding: 15px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<button class="music-btn" id="musicBtn" aria-label="Toggle music">♫</button>
+
+<div class="wrap">
+
+  <!-- INTRO -->
+  <main class="card" id="intro">
+
+    <div class="tiny">October 1 ✦ Birthday Edition</div>
+
+    <h1>John <span class="sparkle">✦</span></h1>
+
+    <h2>A Little Birthday Mystery</h2>
+
+    <p class="subtitle">
+      Before your birthday, I need you to make a few very important choices.
+    </p>
+
+    <div class="birthday">
+      There are no wrong answers. Just go with your first instinct… 👀
     </div>
 
-    <script>
-      const quizForm = document.getElementById('quizForm');
-      const result = document.getElementById('result');
+    <br>
 
-      quizForm.addEventListener('submit', function (event) {
-        event.preventDefault();
+    <button class="start-btn" id="startBtn">
+      Let’s Go ✨
+    </button>
 
-        const answers = {
-          q1: 'B',
-          q2: 'B',
-          q3: 'B'
-        };
+  </main>
 
-        const formData = new FormData(quizForm);
-        let score = 0;
+  <!-- QUIZ -->
+  <main class="card hidden" id="quiz">
 
-        for (const [key, value] of Object.entries(answers)) {
-          if (formData.get(key) === value) score++;
-        }
+    <div class="progress-area">
+      <div class="progress-text">
+        <span>Birthday Mystery</span>
+        <span id="progressText">1 / 7</span>
+      </div>
 
-        result.style.display = 'block';
-        result.textContent = score === 3
-          ? '🎂 Perfect! You know John really well!'
-          : score === 2
-          ? '🎉 Nice job! You got most of them right!'
-          : '😊 Good try! You can always play again and learn more about John!';
-      });
-    </script>
-  </body>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div id="questionArea"></div>
+
+  </main>
+
+  <!-- RESULT -->
+  <main class="card hidden" id="resultScreen">
+
+    <div class="tiny">Mystery Solved ✦</div>
+
+    <div class="reveal-label">
+      Your birthday experience is…
+    </div>
+
+    <h1 class="result" id="result"></h1>
+
+    <p class="result-text">
+      You made your choices. The birthday universe has spoken. 👀✨
+      <br><br>
+      October 1 is looking interesting…
+    </p>
+
+  </main>
+
+</div>
+
+<script>
+/* =========================
+   STAR BACKGROUND
+========================= */
+
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 90; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.animationDelay = Math.random() * 3 + "s";
+  star.style.opacity = Math.random();
+
+  stars.appendChild(star);
+}
+
+
+/* =========================
+   ACTIVITIES
+   These stay hidden from John
+========================= */
+
+const activities = [
+  "Jewelry Making",
+  "Splatter Paint Experience",
+  "Escape Room",
+  "Mosaic Craft"
+];
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+const questions = [
+
+  {
+    question: "You have a completely free afternoon. What sounds most satisfying?",
+    answers: [
+      "Making something you can actually keep",
+      "Doing something spontaneous and a little chaotic",
+      "Solving something challenging with someone",
+      "Getting creative and making something visually cool"
+    ]
+  },
+
+  {
+    question: "Which kind of environment sounds the most fun?",
+    answers: [
+      "Chill, creative, and hands-on",
+      "Energetic, playful, and slightly messy",
+      "Mysterious, exciting, and competitive",
+      "Relaxed, artistic, and aesthetically pleasing"
+    ]
+  },
+
+  {
+    question: "Pick a vibe:",
+    answers: [
+      "“Let me create something unique.”",
+      "“Let me make a beautiful mess.”",
+      "“Let me see if I can figure this out.”",
+      "“Let me piece this together.”"
+    ]
+  },
+
+  {
+    question: "What would make an experience feel worth it afterward?",
+    answers: [
+      "Leaving with something I made myself",
+      "Having hilarious memories and pictures",
+      "Feeling like we accomplished something together",
+      "Having a cool piece of art to display"
+    ]
+  },
+
+  {
+    question: "Pick your ideal kind of challenge:",
+    answers: [
+      "Using my creativity",
+      "Letting loose and trying something new",
+      "Using my brain and teamwork",
+      "Being patient and putting pieces together"
+    ]
+  },
+
+  {
+    question: "If this experience had a personality, which would you choose?",
+    answers: [
+      "✨ Creative & classy",
+      "🤪 Playful & unpredictable",
+      "🕵🏽 Clever & adventurous",
+      "🎨 Artsy & chill"
+    ]
+  },
+
+  {
+    question: "What sounds like the best kind of date/friend day?",
+    answers: [
+      "Something where we can talk while creating",
+      "Something where we can laugh and be unserious",
+      "Something that gets us working together",
+      "Something relaxing where we can focus on creating"
+    ]
+  }
+
+];
+
+
+/* =========================
+   RANDOM HIDDEN MAPPINGS
+========================= */
+
+function shuffle(array) {
+  const arr = [...array];
+
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  return arr;
+}
+
+/*
+Each question secretly assigns its four answers
+to the four activities in a different order.
+*/
+
+const mappings = questions.map(() => shuffle([0, 1, 2, 3]));
+
+
+/* =========================
+   QUIZ STATE
+========================= */
+
+let currentQuestion = 0;
+let scores = [0, 0, 0, 0];
+let selectedAnswer = null;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const intro = document.getElementById("intro");
+const quiz = document.getElementById("quiz");
+const resultScreen = document.getElementById("resultScreen");
+
+const startBtn = document.getElementById("startBtn");
+const questionArea = document.getElementById("questionArea");
+
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+const result = document.getElementById("result");
+
+const musicBtn = document.getElementById("musicBtn");
+
+
+/* =========================
+   START QUIZ
+========================= */
+
+startBtn.addEventListener("click", () => {
+
+  intro.classList.add("hidden");
+  quiz.classList.remove("hidden");
+
+  startMusic();
+
+  showQuestion();
+
+});
+
+
+/* =========================
+   SHOW QUESTION
+========================= */
+
+function showQuestion() {
+
+  selectedAnswer = null;
+
+  const q = questions[currentQuestion];
+
+  progressText.textContent =
+    `${currentQuestion + 1} / ${questions.length}`;
+
+  progressBar.style.width =
+    `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+  questionArea.innerHTML = "";
+
+  const questionTitle = document.createElement("h2");
+  questionTitle.className = "question";
+  questionTitle.textContent = q.question;
+
+  questionArea.appendChild(questionTitle);
+
+  const answers = document.createElement("div");
+  answers.className = "answers";
+
+  q.answers.forEach((answer, index) => {
+
+    const button = document.createElement("button");
+
+    button.className = "answer";
+    button.textContent = answer;
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".answer")
+        .forEach(btn => btn.classList.remove("selected"));
+
+      button.classList.add("selected");
+
+      selectedAnswer = index;
+
+    });
+
+    answers.appendChild(button);
+
+  });
+
+  questionArea.appendChild(answers);
+
+  const nextButton = document.createElement("button");
+
+  nextButton.className = "next-btn";
+  nextButton.textContent =
+    currentQuestion === questions.length - 1
+      ? "Reveal My Birthday Surprise ✨"
+      : "Next →";
+
+  nextButton.addEventListener("click", nextQuestion);
+
+  questionArea.appendChild(nextButton);
+
+}
+
+
+/* =========================
+   NEXT QUESTION
+========================= */
+
+function nextQuestion() {
+
+  if (selectedAnswer === null) {
+    alert("Pick your first instinct 👀");
+    return;
+  }
+
+  const activityIndex =
+    mappings[currentQuestion][selectedAnswer];
+
+  scores[activityIndex]++;
+
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+
+    showQuestion();
+
+  } else {
+
+    showResult();
+
+  }
+
+}
+
+
+/* =========================
+   SHOW RESULT
+========================= */
+
+function showResult() {
+
+  quiz.classList.add("hidden");
+  resultScreen.classList.remove("hidden");
+
+  const highestScore =
+    Math.max(...scores);
+
+  const winners = [];
+
+  scores.forEach((score, index) => {
+
+    if (score === highestScore) {
+      winners.push(index);
+    }
+
+  });
+
+  /*
+    If there is a tie, randomly choose among tied
+    activities so the result is still a surprise.
+  */
+
+  const winningIndex =
+    winners[Math.floor(Math.random() * winners.length)];
+
+  result.textContent =
+    activities[winningIndex];
+
+  launchConfetti();
+
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+function launchConfetti() {
+
+  const symbols = ["✦", "✧", "★", "◆", "•"];
+
+  for (let i = 0; i < 90; i++) {
+
+    const piece = document.createElement("div");
+
+    piece.className = "confetti";
+
+    piece.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    piece.style.left =
+      Math.random() * 100 + "vw";
+
+    piece.style.fontSize =
+      (8 + Math.random() * 12) + "px";
+
+    piece.style.animationDelay =
+      Math.random() * 1.5 + "s";
+
+    piece.style.animationDuration =
+      (2.5 + Math.random() * 2) + "s";
+
+    document.body.appendChild(piece);
+
+    setTimeout(() => {
+      piece.remove();
+    }, 6000);
+
+  }
+
+}
+
+
+/* =========================
+   SIMPLE ORIGINAL MUSIC
+   ========================= */
+
+let audioContext = null;
+let musicPlaying = false;
+let musicTimer = null;
+
+function startMusic() {
+
+  if (musicPlaying) return;
+
+  try {
+
+    audioContext =
+      audioContext ||
+      new (window.AudioContext || window.webkitAudioContext)();
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    musicPlaying = true;
+
+    musicBtn.textContent = "♫";
+
+    playMelody();
+
+  } catch (error) {
+
+    console.log("Audio unavailable.");
+
+  }
+
+}
+
+
+function playMelody() {
+
+  if (!musicPlaying || !audioContext) return;
+
+  const notes = [
+    261.63,
+    329.63,
+    392.00,
+    523.25,
+    392.00,
+    329.63,
+    293.66,
+    392.00
+  ];
+
+  let noteIndex = 0;
+
+  function playNote() {
+
+    if (!musicPlaying) return;
+
+    const oscillator =
+      audioContext.createOscillator();
+
+    const gain =
+      audioContext.createGain();
+
+    oscillator.type = "sine";
+
+    oscillator.frequency.value =
+      notes[noteIndex];
+
+    gain.gain.setValueAtTime(
+      0.0001,
+      audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.045,
+      audioContext.currentTime + 0.03
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      audioContext.currentTime + 0.5
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+      audioContext.currentTime + 0.55
+    );
+
+    noteIndex =
+      (noteIndex + 1) % notes.length;
+
+    musicTimer =
+      setTimeout(playNote, 620);
+
+  }
+
+  playNote();
+
+}
+
+
+musicBtn.addEventListener("click", () => {
+
+  if (!audioContext) {
+    startMusic();
+    return;
+  }
+
+  if (musicPlaying) {
+
+    musicPlaying = false;
+
+    clearTimeout(musicTimer);
+
+    musicBtn.textContent = "🔇";
+
+  } else {
+
+    musicPlaying = true;
+
+    musicBtn.textContent = "♫";
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    playMelody();
+
+  }
+
+});
+
+</script>
+
+</body>
 </html>
