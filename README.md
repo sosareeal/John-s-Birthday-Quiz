@@ -1,1 +1,1 @@
-# John-s-Birthday-Quiz
+# Johns-Birthday-Quiz
