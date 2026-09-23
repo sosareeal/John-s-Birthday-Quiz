@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>John's Birthday Quiz</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #fff4d6, #ffd6e8);
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        max-width: 700px;
+        width: 90%;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 32px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #a8466d;
+        margin-bottom: 20px;
+      }
+
+      .quiz {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .question {
+        background: #fff6fa;
+        border: 1px solid #f0d8e5;
+        border-radius: 12px;
+        padding: 18px;
+      }
+
+      .question h2 {
+        font-size: 1.1rem;
+        margin: 0 0 12px;
+        color: #5b2d3a;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: #fff;
+        border: 1px solid #f0d8e5;
+        cursor: pointer;
+      }
+
+      input[type="radio"] {
+        accent-color: #a8466d;
+      }
+
+      button {
+        background: #a8466d;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #8a3958;
+      }
+
+      #result {
+        display: none;
+        margin-top: 18px;
+        text-align: center;
+        font-weight: bold;
+        color: #2d7a4d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎉 John's Birthday Quiz</h1>
+      <form class="quiz" id="quizForm">
+        <div class="question">
+          <h2>1. What is John's favorite color?</h2>
+          <div class="options">
+            <label><input type="radio" name="q1" value="A" /> Blue</label>
+            <label><input type="radio" name="q1" value="B" /> Red</label>
+            <label><input type="radio" name="q1" value="C" /> Green</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <h2>2. Which hobby does John enjoy the most?</h2>
+          <div class="options">
+            <label><input type="radio" name="q2" value="A" /> Reading</label>
+            <label><input type="radio" name="q2" value="B" /> Hiking</label>
+            <label><input type="radio" name="q2" value="C" /> Cooking</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <h2>3. What is John's birth month?</h2>
+          <div class="options">
+            <label><input type="radio" name="q3" value="A" /> January</label>
+            <label><input type="radio" name="q3" value="B" /> July</label>
+            <label><input type="radio" name="q3" value="C" /> December</label>
+          </div>
+        </div>
+
+        <button type="submit">Submit Answers</button>
+      </form>
+      <div id="result">🎂 Great job! You know John well!</div>
+    </div>
+
+    <script>
+      const quizForm = document.getElementById('quizForm');
+      const result = document.getElementById('result');
+
+      quizForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const answers = {
+          q1: 'B',
+          q2: 'B',
+          q3: 'B'
+        };
+
+        const formData = new FormData(quizForm);
+        let score = 0;
+
+        for (const [key, value] of Object.entries(answers)) {
+          if (formData.get(key) === value) score++;
+        }
+
+        result.style.display = 'block';
+        result.textContent = score === 3
+          ? '🎂 Perfect! You know John really well!'
+          : score === 2
+          ? '🎉 Nice job! You got most of them right!'
+          : '😊 Good try! You can always play again and learn more about John!';
+      });
+    </script>
+  </body>
+</html>
