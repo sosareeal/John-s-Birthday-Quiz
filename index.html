@@ -6,291 +6,278 @@
 <title>John ✦ A Little Birthday Mystery</title>
 
 <style>
-  * {
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+  color: white;
+  background:
+    radial-gradient(circle at top, rgba(70,100,170,.28), transparent 35%),
+    linear-gradient(145deg, #020817, #071a38 50%, #010510);
+  overflow-x: hidden;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px white;
+  animation: twinkle 2.5s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: .25;
+    transform: scale(.7);
   }
-
-  body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Georgia, "Times New Roman", serif;
-    background:
-      radial-gradient(circle at top, rgba(70, 100, 170, .28), transparent 35%),
-      linear-gradient(145deg, #020817, #071a38 50%, #010510);
-    color: #fff;
-    overflow-x: hidden;
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
   }
+}
 
-  .stars {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
+.wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 650px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 25px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  padding: 35px 24px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 28px;
+  background: rgba(3,15,38,.88);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 25px 70px rgba(0,0,0,.45);
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.tiny {
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: #aebddd;
+  margin-bottom: 15px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(42px, 12vw, 70px);
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: clamp(25px, 7vw, 38px);
+  margin: 0 0 15px;
+}
+
+.subtitle {
+  color: #d8e1f2;
+  font-size: 17px;
+  line-height: 1.65;
+  margin: 0 auto 28px;
+}
+
+.birthday {
+  display: inline-block;
+  margin: 10px 0 25px;
+  padding: 9px 17px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50px;
+  color: #dce7ff;
+  background: rgba(255,255,255,.05);
+  font-size: 14px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.start-btn,
+.next-btn {
+  border: none;
+  border-radius: 50px;
+  padding: 15px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #06122c;
+  background: white;
+  box-shadow: 0 8px 25px rgba(255,255,255,.15);
+}
+
+.start-btn:active,
+.next-btn:active {
+  transform: scale(.98);
+}
+
+.music-btn {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  z-index: 10;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(4,17,42,.9);
+  color: white;
+  font-size: 18px;
+}
+
+.progress-area {
+  margin-bottom: 28px;
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  color: #aebddd;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.progress {
+  width: 100%;
+  height: 7px;
+  background: rgba(255,255,255,.1);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 14.28%;
+  background: white;
+  border-radius: 20px;
+  transition: width .4s ease;
+}
+
+.question {
+  font-size: clamp(23px, 6vw, 31px);
+  line-height: 1.35;
+  margin: 0 0 24px;
+}
+
+.answers {
+  display: grid;
+  gap: 12px;
+}
+
+.answer {
+  width: 100%;
+  padding: 16px 17px;
+  border-radius: 17px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.055);
+  color: white;
+  font-size: 15px;
+  text-align: left;
+  line-height: 1.45;
+}
+
+.answer.selected {
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.65);
+}
+
+.next-btn {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.reveal-label {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #aebddd;
+  margin-bottom: 12px;
+}
+
+.result {
+  font-size: clamp(31px, 9vw, 52px);
+  margin: 0 0 20px;
+}
+
+.result-text {
+  color: #d8e1f2;
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+.sparkle {
+  font-size: 28px;
+  animation: float 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+@keyframes float {
+  0%,100% {
+    transform: translateY(0);
   }
-
-  .star {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 0 8px white;
-    animation: twinkle 2.5s infinite ease-in-out;
+  50% {
+    transform: translateY(-7px);
   }
+}
 
-  @keyframes twinkle {
-    0%, 100% {
-      opacity: .25;
-      transform: scale(.7);
-    }
+.confetti {
+  position: fixed;
+  top: -20px;
+  z-index: 20;
+  animation: fall 3.5s linear forwards;
+}
 
-    50% {
-      opacity: 1;
-      transform: scale(1.4);
-    }
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
   }
+}
 
+@media (max-width: 480px) {
   .wrap {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 650px;
-    min-height: 100vh;
-    margin: auto;
-    padding: 30px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 18px 12px;
   }
 
   .card {
-    width: 100%;
-    padding: 35px 24px;
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 28px;
-    background: rgba(3, 15, 38, .82);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 25px 70px rgba(0,0,0,.45);
-    text-align: center;
-  }
-
-  .hidden {
-    display: none !important;
-  }
-
-  .tiny {
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    font-size: 11px;
-    color: #aebddd;
-    margin-bottom: 15px;
-  }
-
-  h1 {
-    margin: 0 0 12px;
-    font-size: clamp(42px, 12vw, 70px);
-    letter-spacing: 2px;
-  }
-
-  h2 {
-    font-size: clamp(25px, 7vw, 38px);
-    margin: 0 0 15px;
+    padding: 30px 18px;
+    border-radius: 23px;
   }
 
   .subtitle {
-    color: #d8e1f2;
-    font-size: 17px;
-    line-height: 1.65;
-    margin: 0 auto 28px;
-    max-width: 500px;
-  }
-
-  .birthday {
-    display: inline-block;
-    margin: 10px 0 25px;
-    padding: 9px 17px;
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 50px;
-    color: #dce7ff;
-    background: rgba(255,255,255,.05);
-    font-size: 14px;
-  }
-
-  button {
-    font-family: inherit;
-    cursor: pointer;
-  }
-
-  .start-btn,
-  .next-btn {
-    border: none;
-    border-radius: 50px;
-    padding: 15px 28px;
     font-size: 16px;
-    font-weight: bold;
-    color: #06122c;
-    background: #fff;
-    box-shadow: 0 8px 25px rgba(255,255,255,.15);
-    transition: .25s ease;
-  }
-
-  .start-btn:hover,
-  .next-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(255,255,255,.22);
-  }
-
-  .music-btn {
-    position: fixed;
-    right: 16px;
-    top: 16px;
-    z-index: 10;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.25);
-    background: rgba(4,17,42,.85);
-    color: white;
-    font-size: 18px;
-  }
-
-  .progress-area {
-    margin-bottom: 28px;
-  }
-
-  .progress-text {
-    display: flex;
-    justify-content: space-between;
-    color: #aebddd;
-    font-size: 13px;
-    margin-bottom: 8px;
-  }
-
-  .progress {
-    width: 100%;
-    height: 7px;
-    background: rgba(255,255,255,.1);
-    border-radius: 20px;
-    overflow: hidden;
-  }
-
-  .progress-bar {
-    height: 100%;
-    width: 14.28%;
-    background: white;
-    border-radius: 20px;
-    transition: width .4s ease;
-  }
-
-  .question {
-    font-size: clamp(23px, 6vw, 31px);
-    line-height: 1.35;
-    margin: 0 0 24px;
-  }
-
-  .answers {
-    display: grid;
-    gap: 12px;
   }
 
   .answer {
-    width: 100%;
-    padding: 16px 17px;
-    border-radius: 17px;
-    border: 1px solid rgba(255,255,255,.15);
-    background: rgba(255,255,255,.055);
-    color: white;
-    font-size: 15px;
-    text-align: left;
-    line-height: 1.45;
-    transition: .2s ease;
+    padding: 15px;
   }
-
-  .answer:hover {
-    background: rgba(255,255,255,.12);
-    transform: translateY(-1px);
-  }
-
-  .answer.selected {
-    background: rgba(255,255,255,.18);
-    border-color: rgba(255,255,255,.65);
-  }
-
-  .next-btn {
-    margin-top: 20px;
-    width: 100%;
-  }
-
-  .reveal-label {
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: #aebddd;
-    margin-bottom: 12px;
-  }
-
-  .result {
-    font-size: clamp(31px, 9vw, 52px);
-    margin: 0 0 20px;
-  }
-
-  .result-text {
-    color: #d8e1f2;
-    line-height: 1.7;
-    font-size: 17px;
-  }
-
-  .sparkle {
-    font-size: 28px;
-    animation: float 2s infinite ease-in-out;
-    display: inline-block;
-  }
-
-  @keyframes float {
-    0%,100% {
-      transform: translateY(0);
-    }
-
-    50% {
-      transform: translateY(-7px);
-    }
-  }
-
-  .confetti {
-    position: fixed;
-    width: 8px;
-    height: 12px;
-    top: -20px;
-    z-index: 20;
-    animation: fall 3.5s linear forwards;
-  }
-
-  @keyframes fall {
-    to {
-      transform: translateY(110vh) rotate(720deg);
-      opacity: 0;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .wrap {
-      padding: 18px 12px;
-    }
-
-    .card {
-      padding: 30px 18px;
-      border-radius: 23px;
-    }
-
-    .subtitle {
-      font-size: 16px;
-    }
-
-    .answer {
-      padding: 15px;
-    }
-  }
+}
 </style>
 </head>
 
@@ -298,29 +285,17 @@
 
 <div class="stars" id="stars"></div>
 
-<button
-  class="music-btn"
-  id="musicBtn"
-  aria-label="Toggle music">
-  ♫
-</button>
+<button class="music-btn" id="musicBtn">♫</button>
 
 <div class="wrap">
 
-  <!-- INTRO -->
   <main class="card" id="intro">
 
-    <div class="tiny">
-      October 1 ✦ Birthday Edition
-    </div>
+    <div class="tiny">October 1 ✦ Birthday Edition</div>
 
-    <h1>
-      John <span class="sparkle">✦</span>
-    </h1>
+    <h1>John <span class="sparkle">✦</span></h1>
 
-    <h2>
-      A Little Birthday Mystery
-    </h2>
+    <h2>A Little Birthday Mystery</h2>
 
     <p class="subtitle">
       Before your birthday, I need you to make a few very important choices.
@@ -339,7 +314,6 @@
   </main>
 
 
-  <!-- QUIZ -->
   <main class="card hidden" id="quiz">
 
     <div class="progress-area">
@@ -350,10 +324,7 @@
       </div>
 
       <div class="progress">
-        <div
-          class="progress-bar"
-          id="progressBar">
-        </div>
+        <div class="progress-bar" id="progressBar"></div>
       </div>
 
     </div>
@@ -363,27 +334,19 @@
   </main>
 
 
-  <!-- RESULT -->
   <main class="card hidden" id="resultScreen">
 
-    <div class="tiny">
-      Mystery Solved ✦
-    </div>
+    <div class="tiny">Mystery Solved ✦</div>
 
     <div class="reveal-label">
       Your birthday experience is…
     </div>
 
-    <h1
-      class="result"
-      id="result">
-    </h1>
+    <h1 class="result" id="result"></h1>
 
     <p class="result-text">
       You made your choices. The birthday universe has spoken. 👀✨
-
       <br><br>
-
       October 1 is looking interesting…
     </p>
 
@@ -394,353 +357,220 @@
 
 <script>
 
-/* =========================
-   STAR BACKGROUND
-========================= */
+/* STARS */
 
 const stars = document.getElementById("stars");
 
 for (let i = 0; i < 90; i++) {
-
   const star = document.createElement("div");
 
   star.className = "star";
-
-  star.style.left =
-    Math.random() * 100 + "%";
-
-  star.style.top =
-    Math.random() * 100 + "%";
-
-  star.style.animationDelay =
-    Math.random() * 3 + "s";
-
-  star.style.opacity =
-    Math.random();
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.animationDelay = Math.random() * 3 + "s";
 
   stars.appendChild(star);
 }
 
 
-/* =========================
-   ACTIVITIES
-========================= */
+/* ACTIVITIES */
 
 const activities = [
-
   "Jewelry Making",
-
   "Splatter Paint Experience",
-
   "Escape Room",
-
   "Mosaic Craft"
-
 ];
 
 
-/* =========================
-   QUESTIONS
-========================= */
+/* QUESTIONS */
 
 const questions = [
 
   {
-    question:
-      "You have a completely free afternoon. What sounds most satisfying?",
-
+    question: "You have a completely free afternoon. What sounds most satisfying?",
     answers: [
-
       "Making something you can actually keep",
-
       "Doing something spontaneous and a little chaotic",
-
       "Solving something challenging with someone",
-
       "Getting creative and making something visually cool"
-
     ]
   },
 
-
   {
-    question:
-      "Which kind of environment sounds the most fun?",
-
+    question: "Which kind of environment sounds the most fun?",
     answers: [
-
       "Chill, creative, and hands-on",
-
       "Energetic, playful, and slightly messy",
-
       "Mysterious, exciting, and competitive",
-
       "Relaxed, artistic, and aesthetically pleasing"
-
     ]
   },
 
-
   {
-    question:
-      "Pick a vibe:",
-
+    question: "Pick a vibe:",
     answers: [
-
       "“Let me create something unique.”",
-
       "“Let me make a beautiful mess.”",
-
       "“Let me see if I can figure this out.”",
-
       "“Let me piece this together.”"
-
     ]
   },
 
-
   {
-    question:
-      "What would make an experience feel worth it afterward?",
-
+    question: "What would make an experience feel worth it afterward?",
     answers: [
-
       "Having hilarious memories and pictures",
-
       "Feeling like we accomplished something together",
-
       "Having a cool piece of art to display",
-
       "Leaving with something I made myself"
-
     ]
   },
 
-
   {
-    question:
-      "Pick your ideal kind of challenge:",
-
+    question: "Pick your ideal kind of challenge:",
     answers: [
-
       "Using my creativity",
-
       "Letting loose and trying something new",
-
       "Using my brain and teamwork",
-
       "Being patient and putting pieces together"
-
     ]
   },
 
-
   {
-    question:
-      "If this experience had a personality, which would you choose?",
-
+    question: "If this experience had a personality, which would you choose?",
     answers: [
-
       "✨ Creative & classy",
-
       "🎨 Artsy & chill",
-
       "🤪 Playful & unpredictable",
-
       "🕵🏽 Clever & adventurous"
-
     ]
   },
 
-
   {
-    question:
-      "What sounds like the best kind of date/friend day?",
-
+    question: "What sounds like the best kind of date/friend day?",
     answers: [
-
       "Something that gets us working together",
-
       "Something relaxing where we can focus on creating",
-
       "Something where we can talk while creating",
-
       "Something where we can laugh and be unserious"
-
     ]
   }
 
 ];
 
 
-/* =========================
-   SECRET MAPPING
-=========================
+/*
+SECRET MAPPING
 
-   0 = Jewelry Making
-   1 = Splatter Paint Experience
-   2 = Escape Room
-   3 = Mosaic Craft
+0 = Jewelry Making
+1 = Splatter Paint Experience
+2 = Escape Room
+3 = Mosaic Craft
 
-   The paint answers are deliberately
-   spread across A/B/C/D.
-========================= */
+The paint choices are spread around
+so there is no obvious answer pattern.
+*/
 
 const mappings = [
-
-  // Q1
   [0, 1, 2, 3],
-
-  // Q2
   [3, 1, 2, 0],
-
-  // Q3
   [0, 1, 2, 3],
-
-  // Q4
   [1, 2, 3, 0],
-
-  // Q5
   [0, 1, 2, 3],
-
-  // Q6
   [0, 3, 1, 2],
-
-  // Q7
   [2, 0, 3, 1]
-
 ];
 
 
-/* =========================
-   QUIZ STATE
-========================= */
+/* QUIZ VARIABLES */
 
 let currentQuestion = 0;
-
-let scores = [
-  0,
-  0,
-  0,
-  0
-];
-
+let scores = [0, 0, 0, 0];
 let selectedAnswer = null;
 
 
-/* =========================
-   ELEMENTS
-========================= */
+/* ELEMENTS */
 
-const intro =
-  document.getElementById("intro");
-
-const quiz =
-  document.getElementById("quiz");
-
-const resultScreen =
-  document.getElementById("resultScreen");
-
-const startBtn =
-  document.getElementById("startBtn");
-
-const questionArea =
-  document.getElementById("questionArea");
-
-const progressText =
-  document.getElementById("progressText");
-
-const progressBar =
-  document.getElementById("progressBar");
-
-const result =
-  document.getElementById("result");
-
-const musicBtn =
-  document.getElementById("musicBtn");
+const intro = document.getElementById("intro");
+const quiz = document.getElementById("quiz");
+const resultScreen = document.getElementById("resultScreen");
+const startBtn = document.getElementById("startBtn");
+const questionArea = document.getElementById("questionArea");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+const result = document.getElementById("result");
 
 
-/* =========================
-   START QUIZ
-========================= */
+/* START BUTTON */
 
-startBtn.addEventListener("click", () => {
+startBtn.onclick = function() {
 
   intro.classList.add("hidden");
 
   quiz.classList.remove("hidden");
 
-  startMusic();
-
   showQuestion();
 
-});
+  startMusic();
+
+};
 
 
-/* =========================
-   SHOW QUESTION
-========================= */
+/* SHOW QUESTION */
 
 function showQuestion() {
 
   selectedAnswer = null;
 
-  const q =
-    questions[currentQuestion];
+  const q = questions[currentQuestion];
 
   progressText.textContent =
-    `${currentQuestion + 1} / ${questions.length}`;
+    (currentQuestion + 1) + " / " + questions.length;
 
   progressBar.style.width =
-    `${((currentQuestion + 1) / questions.length) * 100}%`;
+    ((currentQuestion + 1) / questions.length * 100) + "%";
 
   questionArea.innerHTML = "";
 
 
-  const questionTitle =
-    document.createElement("h2");
+  const title = document.createElement("h2");
 
-  questionTitle.className =
-    "question";
+  title.className = "question";
 
-  questionTitle.textContent =
-    q.question;
+  title.textContent = q.question;
 
-  questionArea.appendChild(questionTitle);
+  questionArea.appendChild(title);
 
 
-  const answers =
-    document.createElement("div");
+  const answers = document.createElement("div");
 
-  answers.className =
-    "answers";
+  answers.className = "answers";
 
 
-  q.answers.forEach((answer, index) => {
+  q.answers.forEach(function(answer, index) {
 
-    const button =
-      document.createElement("button");
+    const button = document.createElement("button");
 
-    button.className =
-      "answer";
+    button.className = "answer";
 
-    button.textContent =
-      answer;
+    button.textContent = answer;
 
 
-    button.addEventListener("click", () => {
+    button.onclick = function() {
 
-      document
-        .querySelectorAll(".answer")
-        .forEach(btn =>
-          btn.classList.remove("selected")
-        );
+      const allAnswers =
+        document.querySelectorAll(".answer");
+
+      allAnswers.forEach(function(btn) {
+        btn.classList.remove("selected");
+      });
 
       button.classList.add("selected");
 
       selectedAnswer = index;
 
-    });
+    };
 
 
     answers.appendChild(button);
@@ -751,62 +581,50 @@ function showQuestion() {
   questionArea.appendChild(answers);
 
 
-  const nextButton =
-    document.createElement("button");
+  const nextButton = document.createElement("button");
 
-  nextButton.className =
-    "next-btn";
+  nextButton.className = "next-btn";
 
-  nextButton.textContent =
-    currentQuestion === questions.length - 1
+  if (currentQuestion === questions.length - 1) {
+    nextButton.textContent =
+      "Reveal My Birthday Surprise ✨";
+  } else {
+    nextButton.textContent =
+      "Next →";
+  }
 
-      ? "Reveal My Birthday Surprise ✨"
 
-      : "Next →";
-
-
-  nextButton.addEventListener(
-    "click",
-    nextQuestion
-  );
-
+  nextButton.onclick = nextQuestion;
 
   questionArea.appendChild(nextButton);
 
 }
 
 
-/* =========================
-   NEXT QUESTION
-========================= */
+/* NEXT QUESTION */
 
 function nextQuestion() {
 
   if (selectedAnswer === null) {
 
-    alert(
-      "Pick your first instinct 👀"
-    );
+    alert("Pick your first instinct 👀");
 
     return;
 
   }
 
 
-  const activityIndex =
+  const activity =
     mappings[currentQuestion][selectedAnswer];
 
 
-  scores[activityIndex]++;
+  scores[activity]++;
 
 
   currentQuestion++;
 
 
-  if (
-    currentQuestion <
-    questions.length
-  ) {
+  if (currentQuestion < questions.length) {
 
     showQuestion();
 
@@ -819,9 +637,7 @@ function nextQuestion() {
 }
 
 
-/* =========================
-   SHOW RESULT
-========================= */
+/* RESULT */
 
 function showResult() {
 
@@ -831,35 +647,20 @@ function showResult() {
 
 
   const highestScore =
-    Math.max(...scores);
+    Math.max.apply(null, scores);
 
 
-  const winners = [];
+  let winningIndex = 0;
 
 
-  scores.forEach((score, index) => {
+  for (let i = 0; i < scores.length; i++) {
 
-    if (score === highestScore) {
-
-      winners.push(index);
-
+    if (scores[i] === highestScore) {
+      winningIndex = i;
+      break;
     }
 
-  });
-
-
-  /*
-    If there is a tie, choose randomly.
-    Normally, following the paint path
-    below gives Paint the highest score.
-  */
-
-  const winningIndex =
-    winners[
-      Math.floor(
-        Math.random() * winners.length
-      )
-    ];
+  }
 
 
   result.textContent =
@@ -871,19 +672,11 @@ function showResult() {
 }
 
 
-/* =========================
-   CONFETTI
-========================= */
+/* CONFETTI */
 
 function launchConfetti() {
 
-  const symbols = [
-    "✦",
-    "✧",
-    "★",
-    "◆",
-    "•"
-  ];
+  const symbols = ["✦", "✧", "★", "◆", "•"];
 
 
   for (let i = 0; i < 90; i++) {
@@ -891,97 +684,70 @@ function launchConfetti() {
     const piece =
       document.createElement("div");
 
-    piece.className =
-      "confetti";
+    piece.className = "confetti";
 
     piece.textContent =
-      symbols[
-        Math.floor(
-          Math.random() *
-          symbols.length
-        )
-      ];
-
+      symbols[Math.floor(Math.random() * symbols.length)];
 
     piece.style.left =
       Math.random() * 100 + "vw";
 
-
     piece.style.fontSize =
       (8 + Math.random() * 12) + "px";
-
 
     piece.style.animationDelay =
       Math.random() * 1.5 + "s";
 
-
-    piece.style.animationDuration =
-      (2.5 + Math.random() * 2) + "s";
-
-
     document.body.appendChild(piece);
 
 
-    setTimeout(
-      () => piece.remove(),
-      6000
-    );
+    setTimeout(function() {
+      piece.remove();
+    }, 6000);
 
   }
 
 }
 
 
-/* =========================
-   MUSIC
-========================= */
+/* MUSIC */
 
 let audioContext = null;
-
 let musicPlaying = false;
-
 let musicTimer = null;
 
 
 function startMusic() {
 
-  if (musicPlaying) return;
-
-
   try {
 
-    audioContext =
-      audioContext ||
-      new (
+    if (!audioContext) {
+
+      const AudioContext =
         window.AudioContext ||
-        window.webkitAudioContext
-      )();
+        window.webkitAudioContext;
 
+      if (!AudioContext) return;
 
-    if (
-      audioContext.state ===
-      "suspended"
-    ) {
-
-      audioContext.resume();
+      audioContext = new AudioContext();
 
     }
 
 
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+
+    if (musicPlaying) return;
+
     musicPlaying = true;
-
-    musicBtn.textContent =
-      "♫";
-
 
     playMelody();
 
-
   } catch (error) {
 
-    console.log(
-      "Audio unavailable."
-    );
+    console.log("Music unavailable.");
 
   }
 
@@ -990,14 +756,10 @@ function startMusic() {
 
 function playMelody() {
 
-  if (
-    !musicPlaying ||
-    !audioContext
-  ) return;
+  if (!musicPlaying || !audioContext) return;
 
 
   const notes = [
-
     261.63,
     329.63,
     392.00,
@@ -1006,7 +768,6 @@ function playMelody() {
     329.63,
     293.66,
     392.00
-
   ];
 
 
@@ -1021,14 +782,11 @@ function playMelody() {
     const oscillator =
       audioContext.createOscillator();
 
-
     const gain =
       audioContext.createGain();
 
 
-    oscillator.type =
-      "sine";
-
+    oscillator.type = "sine";
 
     oscillator.frequency.value =
       notes[noteIndex];
@@ -1039,12 +797,10 @@ function playMelody() {
       audioContext.currentTime
     );
 
-
     gain.gain.exponentialRampToValueAtTime(
       0.045,
       audioContext.currentTime + 0.03
     );
-
 
     gain.gain.exponentialRampToValueAtTime(
       0.0001,
@@ -1054,13 +810,9 @@ function playMelody() {
 
     oscillator.connect(gain);
 
-    gain.connect(
-      audioContext.destination
-    );
-
+    gain.connect(audioContext.destination);
 
     oscillator.start();
-
 
     oscillator.stop(
       audioContext.currentTime + 0.55
@@ -1068,15 +820,11 @@ function playMelody() {
 
 
     noteIndex =
-      (noteIndex + 1) %
-      notes.length;
+      (noteIndex + 1) % notes.length;
 
 
     musicTimer =
-      setTimeout(
-        playNote,
-        620
-      );
+      setTimeout(playNote, 620);
 
   }
 
@@ -1086,59 +834,42 @@ function playMelody() {
 }
 
 
-/* =========================
-   MUSIC BUTTON
-========================= */
+/* MUSIC BUTTON */
 
-musicBtn.addEventListener(
-  "click",
-  () => {
-
-    if (!audioContext) {
-
-      startMusic();
-
-      return;
-
-    }
+const musicBtn =
+  document.getElementById("musicBtn");
 
 
-    if (musicPlaying) {
+musicBtn.onclick = function() {
 
-      musicPlaying = false;
+  if (!audioContext) {
 
-      clearTimeout(
-        musicTimer
-      );
+    startMusic();
 
-      musicBtn.textContent =
-        "🔇";
-
-
-    } else {
-
-      musicPlaying = true;
-
-      musicBtn.textContent =
-        "♫";
-
-
-      if (
-        audioContext.state ===
-        "suspended"
-      ) {
-
-        audioContext.resume();
-
-      }
-
-
-      playMelody();
-
-    }
+    return;
 
   }
-);
+
+
+  if (musicPlaying) {
+
+    musicPlaying = false;
+
+    clearTimeout(musicTimer);
+
+    musicBtn.textContent = "🔇";
+
+  } else {
+
+    musicPlaying = true;
+
+    musicBtn.textContent = "♫";
+
+    playMelody();
+
+  }
+
+};
 
 </script>
 
