@@ -40,8 +40,15 @@
   }
 
   @keyframes twinkle {
-    0%, 100% { opacity: .25; transform: scale(.7); }
-    50% { opacity: 1; transform: scale(1.4); }
+    0%, 100% {
+      opacity: .25;
+      transform: scale(.7);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.4);
+    }
   }
 
   .wrap {
@@ -241,8 +248,13 @@
   }
 
   @keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-7px); }
+    0%,100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-7px);
+    }
   }
 
   .confetti {
@@ -286,18 +298,29 @@
 
 <div class="stars" id="stars"></div>
 
-<button class="music-btn" id="musicBtn" aria-label="Toggle music">♫</button>
+<button
+  class="music-btn"
+  id="musicBtn"
+  aria-label="Toggle music">
+  ♫
+</button>
 
 <div class="wrap">
 
   <!-- INTRO -->
   <main class="card" id="intro">
 
-    <div class="tiny">October 1 ✦ Birthday Edition</div>
+    <div class="tiny">
+      October 1 ✦ Birthday Edition
+    </div>
 
-    <h1>John <span class="sparkle">✦</span></h1>
+    <h1>
+      John <span class="sparkle">✦</span>
+    </h1>
 
-    <h2>A Little Birthday Mystery</h2>
+    <h2>
+      A Little Birthday Mystery
+    </h2>
 
     <p class="subtitle">
       Before your birthday, I need you to make a few very important choices.
@@ -315,38 +338,52 @@
 
   </main>
 
+
   <!-- QUIZ -->
   <main class="card hidden" id="quiz">
 
     <div class="progress-area">
+
       <div class="progress-text">
         <span>Birthday Mystery</span>
         <span id="progressText">1 / 7</span>
       </div>
 
       <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
+        <div
+          class="progress-bar"
+          id="progressBar">
+        </div>
       </div>
+
     </div>
 
     <div id="questionArea"></div>
 
   </main>
 
+
   <!-- RESULT -->
   <main class="card hidden" id="resultScreen">
 
-    <div class="tiny">Mystery Solved ✦</div>
+    <div class="tiny">
+      Mystery Solved ✦
+    </div>
 
     <div class="reveal-label">
       Your birthday experience is…
     </div>
 
-    <h1 class="result" id="result"></h1>
+    <h1
+      class="result"
+      id="result">
+    </h1>
 
     <p class="result-text">
       You made your choices. The birthday universe has spoken. 👀✨
+
       <br><br>
+
       October 1 is looking interesting…
     </p>
 
@@ -354,7 +391,9 @@
 
 </div>
 
+
 <script>
+
 /* =========================
    STAR BACKGROUND
 ========================= */
@@ -362,13 +401,22 @@
 const stars = document.getElementById("stars");
 
 for (let i = 0; i < 90; i++) {
+
   const star = document.createElement("div");
+
   star.className = "star";
 
-  star.style.left = Math.random() * 100 + "%";
-  star.style.top = Math.random() * 100 + "%";
-  star.style.animationDelay = Math.random() * 3 + "s";
-  star.style.opacity = Math.random();
+  star.style.left =
+    Math.random() * 100 + "%";
+
+  star.style.top =
+    Math.random() * 100 + "%";
+
+  star.style.animationDelay =
+    Math.random() * 3 + "s";
+
+  star.style.opacity =
+    Math.random();
 
   stars.appendChild(star);
 }
@@ -376,14 +424,18 @@ for (let i = 0; i < 90; i++) {
 
 /* =========================
    ACTIVITIES
-   These stay hidden from John
 ========================= */
 
 const activities = [
+
   "Jewelry Making",
+
   "Splatter Paint Experience",
+
   "Escape Room",
+
   "Mosaic Craft"
+
 ];
 
 
@@ -392,82 +444,129 @@ const activities = [
 ========================= */
 
 const questions = [
-const mappings = [
-  [1, 0, 2, 3],
-  [0, 1, 2, 3],
-  [0, 1, 2, 3],
-  [1, 0, 2, 3],
-  [0, 1, 2, 3],
-  [0, 1, 2, 3],
-  [0, 1, 2, 3]
-];
+
   {
-    question: "You have a completely free afternoon. What sounds most satisfying?",
+    question:
+      "You have a completely free afternoon. What sounds most satisfying?",
+
     answers: [
+
       "Making something you can actually keep",
+
       "Doing something spontaneous and a little chaotic",
+
       "Solving something challenging with someone",
+
       "Getting creative and making something visually cool"
+
     ]
   },
 
+
   {
-    question: "Which kind of environment sounds the most fun?",
+    question:
+      "Which kind of environment sounds the most fun?",
+
     answers: [
+
       "Chill, creative, and hands-on",
+
       "Energetic, playful, and slightly messy",
+
       "Mysterious, exciting, and competitive",
+
       "Relaxed, artistic, and aesthetically pleasing"
+
     ]
   },
 
+
   {
-    question: "Pick a vibe:",
+    question:
+      "Pick a vibe:",
+
     answers: [
+
       "“Let me create something unique.”",
+
       "“Let me make a beautiful mess.”",
+
       "“Let me see if I can figure this out.”",
+
       "“Let me piece this together.”"
+
     ]
   },
 
+
   {
-    question: "What would make an experience feel worth it afterward?",
+    question:
+      "What would make an experience feel worth it afterward?",
+
     answers: [
-      "Leaving with something I made myself",
+
       "Having hilarious memories and pictures",
+
       "Feeling like we accomplished something together",
-      "Having a cool piece of art to display"
+
+      "Having a cool piece of art to display",
+
+      "Leaving with something I made myself"
+
     ]
   },
 
+
   {
-    question: "Pick your ideal kind of challenge:",
+    question:
+      "Pick your ideal kind of challenge:",
+
     answers: [
+
       "Using my creativity",
+
       "Letting loose and trying something new",
+
       "Using my brain and teamwork",
+
       "Being patient and putting pieces together"
+
     ]
   },
 
+
   {
-    question: "If this experience had a personality, which would you choose?",
+    question:
+      "If this experience had a personality, which would you choose?",
+
     answers: [
+
       "✨ Creative & classy",
+
+      "🎨 Artsy & chill",
+
       "🤪 Playful & unpredictable",
-      "🕵🏽 Clever & adventurous",
-      "🎨 Artsy & chill"
+
+      "🕵🏽 Clever & adventurous"
+
     ]
   },
 
+
   {
-    question: "What sounds like the best kind of date/friend day?",
+    question:
+      "What sounds like the best kind of date/friend day?",
+
     answers: [
-      "Something where we can talk while creating",
-      "Something where we can laugh and be unserious",
+
       "Something that gets us working together",
-      "Something relaxing where we can focus on creating"
+
+      "Something relaxing where we can focus on creating",
+
+      "Something where we can talk while creating",
+
+      "Something where we can laugh and be unserious"
+
     ]
   }
 
@@ -475,26 +574,42 @@ const mappings = [
 
 
 /* =========================
-   RANDOM HIDDEN MAPPINGS
+   SECRET MAPPING
+=========================
+
+   0 = Jewelry Making
+   1 = Splatter Paint Experience
+   2 = Escape Room
+   3 = Mosaic Craft
+
+   The paint answers are deliberately
+   spread across A/B/C/D.
 ========================= */
 
-function shuffle(array) {
-  const arr = [...array];
+const mappings = [
 
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
+  // Q1
+  [0, 1, 2, 3],
 
-  return arr;
-}
+  // Q2
+  [3, 1, 2, 0],
 
-/*
-Each question secretly assigns its four answers
-to the four activities in a different order.
-*/
+  // Q3
+  [0, 1, 2, 3],
 
-const mappings = questions.map(() => shuffle([0, 1, 2, 3]));
+  // Q4
+  [1, 2, 3, 0],
+
+  // Q5
+  [0, 1, 2, 3],
+
+  // Q6
+  [0, 3, 1, 2],
+
+  // Q7
+  [2, 0, 3, 1]
+
+];
 
 
 /* =========================
@@ -502,7 +617,14 @@ const mappings = questions.map(() => shuffle([0, 1, 2, 3]));
 ========================= */
 
 let currentQuestion = 0;
-let scores = [0, 0, 0, 0];
+
+let scores = [
+  0,
+  0,
+  0,
+  0
+];
+
 let selectedAnswer = null;
 
 
@@ -510,19 +632,32 @@ let selectedAnswer = null;
    ELEMENTS
 ========================= */
 
-const intro = document.getElementById("intro");
-const quiz = document.getElementById("quiz");
-const resultScreen = document.getElementById("resultScreen");
+const intro =
+  document.getElementById("intro");
 
-const startBtn = document.getElementById("startBtn");
-const questionArea = document.getElementById("questionArea");
+const quiz =
+  document.getElementById("quiz");
 
-const progressText = document.getElementById("progressText");
-const progressBar = document.getElementById("progressBar");
+const resultScreen =
+  document.getElementById("resultScreen");
 
-const result = document.getElementById("result");
+const startBtn =
+  document.getElementById("startBtn");
 
-const musicBtn = document.getElementById("musicBtn");
+const questionArea =
+  document.getElementById("questionArea");
+
+const progressText =
+  document.getElementById("progressText");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const result =
+  document.getElementById("result");
+
+const musicBtn =
+  document.getElementById("musicBtn");
 
 
 /* =========================
@@ -532,6 +667,7 @@ const musicBtn = document.getElementById("musicBtn");
 startBtn.addEventListener("click", () => {
 
   intro.classList.add("hidden");
+
   quiz.classList.remove("hidden");
 
   startMusic();
@@ -549,7 +685,8 @@ function showQuestion() {
 
   selectedAnswer = null;
 
-  const q = questions[currentQuestion];
+  const q =
+    questions[currentQuestion];
 
   progressText.textContent =
     `${currentQuestion + 1} / ${questions.length}`;
@@ -559,27 +696,45 @@ function showQuestion() {
 
   questionArea.innerHTML = "";
 
-  const questionTitle = document.createElement("h2");
-  questionTitle.className = "question";
-  questionTitle.textContent = q.question;
+
+  const questionTitle =
+    document.createElement("h2");
+
+  questionTitle.className =
+    "question";
+
+  questionTitle.textContent =
+    q.question;
 
   questionArea.appendChild(questionTitle);
 
-  const answers = document.createElement("div");
-  answers.className = "answers";
+
+  const answers =
+    document.createElement("div");
+
+  answers.className =
+    "answers";
+
 
   q.answers.forEach((answer, index) => {
 
-    const button = document.createElement("button");
+    const button =
+      document.createElement("button");
 
-    button.className = "answer";
-    button.textContent = answer;
+    button.className =
+      "answer";
+
+    button.textContent =
+      answer;
+
 
     button.addEventListener("click", () => {
 
       document
         .querySelectorAll(".answer")
-        .forEach(btn => btn.classList.remove("selected"));
+        .forEach(btn =>
+          btn.classList.remove("selected")
+        );
 
       button.classList.add("selected");
 
@@ -587,21 +742,34 @@ function showQuestion() {
 
     });
 
+
     answers.appendChild(button);
 
   });
 
+
   questionArea.appendChild(answers);
 
-  const nextButton = document.createElement("button");
 
-  nextButton.className = "next-btn";
+  const nextButton =
+    document.createElement("button");
+
+  nextButton.className =
+    "next-btn";
+
   nextButton.textContent =
     currentQuestion === questions.length - 1
+
       ? "Reveal My Birthday Surprise ✨"
+
       : "Next →";
 
-  nextButton.addEventListener("click", nextQuestion);
+
+  nextButton.addEventListener(
+    "click",
+    nextQuestion
+  );
+
 
   questionArea.appendChild(nextButton);
 
@@ -615,18 +783,30 @@ function showQuestion() {
 function nextQuestion() {
 
   if (selectedAnswer === null) {
-    alert("Pick your first instinct 👀");
+
+    alert(
+      "Pick your first instinct 👀"
+    );
+
     return;
+
   }
+
 
   const activityIndex =
     mappings[currentQuestion][selectedAnswer];
 
+
   scores[activityIndex]++;
+
 
   currentQuestion++;
 
-  if (currentQuestion < questions.length) {
+
+  if (
+    currentQuestion <
+    questions.length
+  ) {
 
     showQuestion();
 
@@ -646,31 +826,45 @@ function nextQuestion() {
 function showResult() {
 
   quiz.classList.add("hidden");
+
   resultScreen.classList.remove("hidden");
+
 
   const highestScore =
     Math.max(...scores);
 
+
   const winners = [];
+
 
   scores.forEach((score, index) => {
 
     if (score === highestScore) {
+
       winners.push(index);
+
     }
 
   });
 
+
   /*
-    If there is a tie, randomly choose among tied
-    activities so the result is still a surprise.
+    If there is a tie, choose randomly.
+    Normally, following the paint path
+    below gives Paint the highest score.
   */
 
   const winningIndex =
-    winners[Math.floor(Math.random() * winners.length)];
+    winners[
+      Math.floor(
+        Math.random() * winners.length
+      )
+    ];
+
 
   result.textContent =
     activities[winningIndex];
+
 
   launchConfetti();
 
@@ -683,34 +877,55 @@ function showResult() {
 
 function launchConfetti() {
 
-  const symbols = ["✦", "✧", "★", "◆", "•"];
+  const symbols = [
+    "✦",
+    "✧",
+    "★",
+    "◆",
+    "•"
+  ];
+
 
   for (let i = 0; i < 90; i++) {
 
-    const piece = document.createElement("div");
+    const piece =
+      document.createElement("div");
 
-    piece.className = "confetti";
+    piece.className =
+      "confetti";
 
     piece.textContent =
-      symbols[Math.floor(Math.random() * symbols.length)];
+      symbols[
+        Math.floor(
+          Math.random() *
+          symbols.length
+        )
+      ];
+
 
     piece.style.left =
       Math.random() * 100 + "vw";
 
+
     piece.style.fontSize =
       (8 + Math.random() * 12) + "px";
+
 
     piece.style.animationDelay =
       Math.random() * 1.5 + "s";
 
+
     piece.style.animationDuration =
       (2.5 + Math.random() * 2) + "s";
 
+
     document.body.appendChild(piece);
 
-    setTimeout(() => {
-      piece.remove();
-    }, 6000);
+
+    setTimeout(
+      () => piece.remove(),
+      6000
+    );
 
   }
 
@@ -718,36 +933,55 @@ function launchConfetti() {
 
 
 /* =========================
-   SIMPLE ORIGINAL MUSIC
-   ========================= */
+   MUSIC
+========================= */
 
 let audioContext = null;
+
 let musicPlaying = false;
+
 let musicTimer = null;
+
 
 function startMusic() {
 
   if (musicPlaying) return;
 
+
   try {
 
     audioContext =
       audioContext ||
-      new (window.AudioContext || window.webkitAudioContext)();
+      new (
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
 
-    if (audioContext.state === "suspended") {
+
+    if (
+      audioContext.state ===
+      "suspended"
+    ) {
+
       audioContext.resume();
+
     }
+
 
     musicPlaying = true;
 
-    musicBtn.textContent = "♫";
+    musicBtn.textContent =
+      "♫";
+
 
     playMelody();
 
+
   } catch (error) {
 
-    console.log("Audio unavailable.");
+    console.log(
+      "Audio unavailable."
+    );
 
   }
 
@@ -756,9 +990,14 @@ function startMusic() {
 
 function playMelody() {
 
-  if (!musicPlaying || !audioContext) return;
+  if (
+    !musicPlaying ||
+    !audioContext
+  ) return;
+
 
   const notes = [
+
     261.63,
     329.63,
     392.00,
@@ -767,92 +1006,139 @@ function playMelody() {
     329.63,
     293.66,
     392.00
+
   ];
 
+
   let noteIndex = 0;
+
 
   function playNote() {
 
     if (!musicPlaying) return;
 
+
     const oscillator =
       audioContext.createOscillator();
+
 
     const gain =
       audioContext.createGain();
 
-    oscillator.type = "sine";
+
+    oscillator.type =
+      "sine";
+
 
     oscillator.frequency.value =
       notes[noteIndex];
+
 
     gain.gain.setValueAtTime(
       0.0001,
       audioContext.currentTime
     );
 
+
     gain.gain.exponentialRampToValueAtTime(
       0.045,
       audioContext.currentTime + 0.03
     );
+
 
     gain.gain.exponentialRampToValueAtTime(
       0.0001,
       audioContext.currentTime + 0.5
     );
 
+
     oscillator.connect(gain);
-    gain.connect(audioContext.destination);
+
+    gain.connect(
+      audioContext.destination
+    );
+
 
     oscillator.start();
+
 
     oscillator.stop(
       audioContext.currentTime + 0.55
     );
 
+
     noteIndex =
-      (noteIndex + 1) % notes.length;
+      (noteIndex + 1) %
+      notes.length;
+
 
     musicTimer =
-      setTimeout(playNote, 620);
+      setTimeout(
+        playNote,
+        620
+      );
 
   }
+
 
   playNote();
 
 }
 
 
-musicBtn.addEventListener("click", () => {
+/* =========================
+   MUSIC BUTTON
+========================= */
 
-  if (!audioContext) {
-    startMusic();
-    return;
-  }
+musicBtn.addEventListener(
+  "click",
+  () => {
 
-  if (musicPlaying) {
+    if (!audioContext) {
 
-    musicPlaying = false;
+      startMusic();
 
-    clearTimeout(musicTimer);
+      return;
 
-    musicBtn.textContent = "🔇";
-
-  } else {
-
-    musicPlaying = true;
-
-    musicBtn.textContent = "♫";
-
-    if (audioContext.state === "suspended") {
-      audioContext.resume();
     }
 
-    playMelody();
+
+    if (musicPlaying) {
+
+      musicPlaying = false;
+
+      clearTimeout(
+        musicTimer
+      );
+
+      musicBtn.textContent =
+        "🔇";
+
+
+    } else {
+
+      musicPlaying = true;
+
+      musicBtn.textContent =
+        "♫";
+
+
+      if (
+        audioContext.state ===
+        "suspended"
+      ) {
+
+        audioContext.resume();
+
+      }
+
+
+      playMelody();
+
+    }
 
   }
-
-});
+);
 
 </script>
 
